@@ -1,72 +1,590 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hélio Henrique | Analista de Sistemas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Treino PRO Ricky - Premium</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#0f172a; color:#f1f5f9; }
-    header { padding:40px; text-align:center; background:#020617; }
-    h1 { margin:0; font-size:32px; }
-    h2 { color:#38bdf8; }
-    section { padding:40px; max-width:900px; margin:auto; }
-    .card { background:#020617; padding:20px; border-radius:10px; margin-bottom:20px; }
-    a { color:#38bdf8; text-decoration:none; }
+    :root{
+      --bg:#0a0f14;
+      --bg2:#0e141c;
+      --card:#131b25;
+      --card2:#1a2431;
+      --line:#293546;
+      --text:#eef4fb;
+      --muted:#96a6ba;
+      --gold:#f3c547;
+      --gold2:#ffe08b;
+      --green:#22c55e;
+      --shadow:0 18px 40px rgba(0,0,0,.32);
+      --radius:24px;
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{
+      margin:0;padding:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(243,197,71,.12), transparent 24%),
+        radial-gradient(circle at top left, rgba(255,255,255,.04), transparent 18%),
+        linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
+    }
+    body{padding:18px 14px 110px}
+    .app{max-width:780px;margin:0 auto}
+    .hero{
+      position:relative;overflow:hidden;
+      background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+      border:1px solid rgba(243,197,71,.2);
+      border-radius:32px;
+      padding:22px 18px 18px;
+      box-shadow:var(--shadow);
+      margin-bottom:14px;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;
+      background:radial-gradient(circle, rgba(243,197,71,.18), transparent 65%);
+      filter:blur(12px);
+    }
+    .topline{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:rgba(243,197,71,.14);
+      border:1px solid rgba(243,197,71,.2);
+      color:var(--gold2);
+      font-weight:800;font-size:12px;letter-spacing:.4px;text-transform:uppercase;
+    }
+    .status{font-size:12px;color:var(--muted)}
+    h1{
+      margin:0 0 8px;
+      font-size:30px;line-height:1.02;letter-spacing:-.03em;
+    }
+    .sub{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .name-badge{
+      margin-top:14px;display:inline-block;
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      color:#111;font-weight:900;
+      padding:10px 15px;border-radius:16px;
+      box-shadow:0 10px 18px rgba(243,197,71,.18);
+    }
+    .stats{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;
+    }
+    .stat{
+      background:linear-gradient(180deg,var(--card),#101721);
+      border:1px solid var(--line);
+      border-radius:18px;padding:12px;
+    }
+    .stat .k{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px}
+    .stat .v{font-size:14px;font-weight:800}
+    .tabs-wrap{
+      position:sticky;top:10px;z-index:15;margin-bottom:14px;
+    }
+    .tabs{
+      display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+      background:rgba(16,23,33,.8);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:22px;padding:8px;
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+    .tab-btn{
+      border:none;cursor:pointer;
+      padding:12px 8px;border-radius:16px;
+      background:transparent;color:var(--muted);
+      font-weight:800;font-size:13px;
+      transition:.2s ease;
+    }
+    .tab-btn.active{
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      color:#111;
+      box-shadow:0 8px 18px rgba(243,197,71,.18);
+    }
+    .toolbar{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;
+    }
+    .tool{
+      border:none;cursor:pointer;
+      padding:12px 10px;border-radius:16px;
+      background:linear-gradient(180deg,var(--card2),#131b25);
+      color:var(--text);font-weight:800;font-size:13px;
+      border:1px solid var(--line);
+    }
+    .tool.gold{
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      color:#111;border-color:rgba(243,197,71,.35);
+    }
+    .card{
+      background:linear-gradient(180deg,var(--card),#101721);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:16px 14px;
+      margin-bottom:14px;
+      animation:fadeIn .22s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:.55;transform:translateY(6px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .compact{padding:14px}
+    .section-title{
+      margin:0 0 10px;
+      color:#dce6f4;font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+    }
+    .progress-bar{
+      width:100%;height:11px;border-radius:999px;overflow:hidden;
+      background:#0f1620;border:1px solid #243042;
+    }
+    .progress-fill{
+      height:100%;width:0%;
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      transition:width .2s ease;
+    }
+    .progress-text{margin-top:8px;color:var(--muted);font-size:13px}
+    .head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .badge{
+      width:46px;height:46px;border-radius:16px;
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,var(--gold),#ca9f2a);
+      color:#111;font-weight:900;font-size:22px;
+      box-shadow:0 10px 20px rgba(243,197,71,.18);
+    }
+    h2{margin:0;font-size:22px}
+    .focus{margin:4px 0 0;color:var(--gold2);font-size:13px;font-weight:700}
+    .exercise-list{display:grid;gap:9px}
+    .item{
+      display:grid;grid-template-columns:22px 1fr auto auto;gap:10px;align-items:center;
+      background:linear-gradient(180deg,var(--card2),#141d28);
+      border:1px solid #2a3749;border-radius:18px;padding:12px;
+    }
+    .check{
+      appearance:none;width:18px;height:18px;border-radius:6px;
+      border:2px solid var(--gold);background:transparent;cursor:pointer;position:relative;
+    }
+    .check:checked{background:var(--green);border-color:var(--green)}
+    .check:checked:after{
+      content:"";position:absolute;left:4px;top:1px;width:4px;height:9px;
+      border:solid #09100b;border-width:0 2px 2px 0;transform:rotate(45deg);
+    }
+    .name{font-size:15px;font-weight:800;margin-bottom:2px}
+    .meta{font-size:13px;color:var(--muted)}
+    .counter{display:flex;align-items:center;gap:6px;min-width:116px;justify-content:flex-end}
+    .ctr-btn{
+      width:28px;height:28px;border:none;border-radius:10px;cursor:pointer;font-weight:900;
+      background:#101721;color:var(--text);border:1px solid #324055;
+    }
+    .ctr-value{min-width:30px;text-align:center;font-weight:800;color:var(--gold2)}
+    .load-input{
+      width:88px;text-align:center;font-size:12px;color:var(--text);
+      background:#0f1620;border:1px dashed #425069;padding:10px 8px;border-radius:12px;outline:none;
+    }
+    .load-input::placeholder{color:#7b8898}
+    .timer-display{
+      font-size:38px;font-weight:900;text-align:center;color:var(--gold2);
+      background:linear-gradient(180deg,var(--card2),#0f1620);
+      border-radius:18px;padding:10px 12px;border:1px solid #2a3749;margin-bottom:10px;
+    }
+    .timer-controls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .timer-btn{
+      border:none;cursor:pointer;padding:12px 10px;border-radius:14px;
+      background:linear-gradient(180deg,var(--card2),#131b25);
+      color:var(--text);font-weight:800;border:1px solid var(--line);
+    }
+    .timer-btn.primary{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#111}
+    .history-list,.tips{display:grid;gap:8px}
+    .history-item,.tip{
+      background:linear-gradient(180deg,var(--card2),#141d28);
+      border:1px solid #2a3749;border-radius:16px;padding:12px;
+    }
+    .history-item{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .history-left b{display:block;font-size:14px;margin-bottom:2px}
+    .history-left span,.history-right{font-size:12px;color:var(--muted)}
+    .tip b{display:block;margin-bottom:4px}
+    .planner{
+      display:grid;grid-template-columns:repeat(7,1fr);gap:8px;
+    }
+    .day{
+      background:linear-gradient(180deg,var(--card2),#141d28);
+      border:1px solid #2a3749;border-radius:16px;padding:10px 6px;text-align:center;
+      font-weight:800;
+    }
+    .day .d{font-size:10px;color:var(--muted);margin-bottom:5px}
+    .day .t{font-size:14px}
+    .calendar{
+      display:grid;grid-template-columns:repeat(7,1fr);gap:8px;
+    }
+    .cal-day{
+      padding:10px;border-radius:14px;text-align:center;cursor:pointer;font-weight:800;
+      background:linear-gradient(180deg,var(--card2),#141d28);
+      border:1px solid #2a3749;color:var(--text);
+    }
+    .cal-day.done{
+      background:linear-gradient(180deg,#2fd06d,#1ea954);
+      color:#07110a;border-color:#2fd06d;
+    }
+    .hidden{display:none !important}
+    .footer-nav{
+      position:fixed;left:14px;right:14px;bottom:14px;z-index:20;
+      background:rgba(16,23,33,.88);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:24px;padding:8px;
+      box-shadow:0 14px 34px rgba(0,0,0,.3);
+      display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+      max-width:780px;margin:auto;
+    }
+    .nav-btn{
+      border:none;cursor:pointer;background:transparent;color:var(--muted);
+      padding:11px 6px;border-radius:16px;font-weight:800;font-size:12px;
+    }
+    .nav-btn.active{
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      color:#111;
+    }
+    .footer{text-align:center;color:var(--muted);font-size:12px;margin:8px 0 4px}
+    @media (max-width:720px){
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .toolbar,.timer-controls{grid-template-columns:repeat(2,1fr)}
+      .tabs{grid-template-columns:repeat(5,1fr)}
+      .item{grid-template-columns:22px 1fr}
+      .counter,.load-input{grid-column:2;justify-self:start}
+      .load-input{width:120px}
+      h1{font-size:25px}
+    }
   </style>
 </head>
 <body>
+  <div class="app">
+    <section class="hero">
+      <div class="topline">
+        <div class="pill">Treino PRO Premium</div>
+        <div class="status">Visual estilo app</div>
+      </div>
+      <h1>Treino A/B/C/D<br></h1>
+      <p class="sub"></p>
+      <div class="name-badge">Ricky</div>
+      <div class="stats">
+        <div class="stat"><div class="k">Objetivo</div><div class="v">Hipertrofia</div></div>
+        <div class="stat"><div class="k">Foco extra</div><div class="v">Core + cardio</div></div>
+        <div class="stat"><div class="k">Formato</div><div class="v">Abas premium</div></div>
+        <div class="stat"><div class="k">Recursos</div><div class="v">Histórico</div></div>
+      </div>
+    </section>
 
-<header>
-  <h1>Hélio Henrique Mendes Gomes</h1>
-  <p>Especialista em ERP TOTVS RM | Analista de Sistemas | SQL | Processos</p>
-</header>
+    <div class="tabs-wrap">
+      <div class="tabs" id="topTabs">
+        <button class="tab-btn active" data-tab="tab-a">A</button>
+        <button class="tab-btn" data-tab="tab-b">B</button>
+        <button class="tab-btn" data-tab="tab-c">C</button>
+        <button class="tab-btn" data-tab="tab-d">Cardio</button>
+        <button class="tab-btn" data-tab="tab-tools">Extras</button>
+      </div>
+    </div>
 
-<section>
-  <h2>Sobre</h2>
-  <div class="card">
-    <p>Analista de Sistemas com experiência em implantação, sustentação e melhoria de processos utilizando ERP TOTVS RM. Atuação com SQL Server, relatórios, cubos e análise de dados, focado em eficiência operacional e geração de valor para o negócio.</p>
-  </div>
-</section>
+    <div class="toolbar">
+      <button class="tool gold" onclick="saveWorkout()">Salvar</button>
+      <button class="tool" onclick="resetChecks()">Limpar checks</button>
+      <button class="tool" onclick="resetAllData()">Zerar tudo</button>
+    </div>
 
-<section>
-  <h2>Experiência</h2>
-  <div class="card">
-    <strong>Analista de Sistemas - Univértix</strong>
-    <p>Implantação e melhorias no ERP TOTVS RM, parametrização de módulos, relatórios e suporte.</p>
-  </div>
-  <div class="card">
-    <strong>UFMG</strong>
-    <p>Mapeamento de processos, evolução do ERP e treinamentos.</p>
-  </div>
-  <div class="card">
-    <strong>TOTVS</strong>
-    <p>Suporte especializado, relatórios, cubos e melhorias sistêmicas.</p>
-  </div>
-</section>
+    <section class="card compact">
+      <div class="section-title">Progresso do treino</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 de 31 exercícios marcados</div>
+    </section>
 
-<section>
-  <h2>Competências</h2>
-  <div class="card">
-    <p>TOTVS RM • SQL Server • ERP • BPM • Implantação • Análise de Requisitos • Scrum • Jira</p>
-  </div>
-</section>
+    <section id="tab-a" class="tab-panel">
+      <section class="card">
+        <div class="head"><div class="badge">A</div><div><h2>Peito + Tríceps</h2><div class="focus">+2 exercícios de tríceps</div></div></div>
+        <div class="exercise-list">
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a1"><div><div class="name">Supino reto</div><div class="meta">3x 6–10</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a1',-1)">−</button><div class="ctr-value" id="sets-a1">0</div><button class="ctr-btn" onclick="changeSets('a1',1)">+</button></div><input class="load-input" data-load="a1" data-label="Supino reto" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a2"><div><div class="name">Supino inclinado</div><div class="meta">3x 8–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a2',-1)">−</button><div class="ctr-value" id="sets-a2">0</div><button class="ctr-btn" onclick="changeSets('a2',1)">+</button></div><input class="load-input" data-load="a2" data-label="Supino inclinado" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a3"><div><div class="name">Crucifixo</div><div class="meta">3x 12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a3',-1)">−</button><div class="ctr-value" id="sets-a3">0</div><button class="ctr-btn" onclick="changeSets('a3',1)">+</button></div><input class="load-input" data-load="a3" data-label="Crucifixo" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a4"><div><div class="name">Tríceps testa</div><div class="meta">4x 8–10</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a4',-1)">−</button><div class="ctr-value" id="sets-a4">0</div><button class="ctr-btn" onclick="changeSets('a4',1)">+</button></div><input class="load-input" data-load="a4" data-label="Tríceps testa" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a5"><div><div class="name">Tríceps corda</div><div class="meta">3x 10–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a5',-1)">−</button><div class="ctr-value" id="sets-a5">0</div><button class="ctr-btn" onclick="changeSets('a5',1)">+</button></div><input class="load-input" data-load="a5" data-label="Tríceps corda" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a6"><div><div class="name">Mergulho no banco</div><div class="meta">3x até a falha</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a6',-1)">−</button><div class="ctr-value" id="sets-a6">0</div><button class="ctr-btn" onclick="changeSets('a6',1)">+</button></div><input class="load-input" data-load="a6" data-label="Mergulho no banco" placeholder="Livre"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a7"><div><div class="name">Drop set na corda</div><div class="meta">2x</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a7',-1)">−</button><div class="ctr-value" id="sets-a7">0</div><button class="ctr-btn" onclick="changeSets('a7',1)">+</button></div><input class="load-input" data-load="a7" data-label="Drop set na corda" placeholder="Final"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="a8"><div><div class="name">Prancha</div><div class="meta">3x</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('a8',-1)">−</button><div class="ctr-value" id="sets-a8">0</div><button class="ctr-btn" onclick="changeSets('a8',1)">+</button></div><input class="load-input" data-load="a8" data-label="Prancha" placeholder="Tempo"></label>
+        </div>
+      </section>
+    </section>
 
-<section>
-  <h2>Projetos</h2>
-  <div class="card">
-    <p><strong>Implantação ERP:</strong> Estruturação de processos e parametrização de módulos.</p>
-    <p><strong>Relatórios SQL:</strong> Desenvolvimento de consultas e dashboards gerenciais.</p>
-    <p><strong>Mapeamento BPM:</strong> Otimização de processos administrativos.</p>
-  </div>
-</section>
+    <section id="tab-b" class="tab-panel hidden">
+      <section class="card">
+        <div class="head"><div class="badge">B</div><div><h2>Costas + Bíceps</h2><div class="focus">+2 exercícios de bíceps</div></div></div>
+        <div class="exercise-list">
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b1"><div><div class="name">Barra fixa</div><div class="meta">3x até a falha</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b1',-1)">−</button><div class="ctr-value" id="sets-b1">0</div><button class="ctr-btn" onclick="changeSets('b1',1)">+</button></div><input class="load-input" data-load="b1" data-label="Barra fixa" placeholder="Corporal"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b2"><div><div class="name">Remada curvada</div><div class="meta">3x 8–10</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b2',-1)">−</button><div class="ctr-value" id="sets-b2">0</div><button class="ctr-btn" onclick="changeSets('b2',1)">+</button></div><input class="load-input" data-load="b2" data-label="Remada curvada" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b3"><div><div class="name">Remada baixa</div><div class="meta">3x 10–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b3',-1)">−</button><div class="ctr-value" id="sets-b3">0</div><button class="ctr-btn" onclick="changeSets('b3',1)">+</button></div><input class="load-input" data-load="b3" data-label="Remada baixa" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b4"><div><div class="name">Rosca direta</div><div class="meta">4x 8–10</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b4',-1)">−</button><div class="ctr-value" id="sets-b4">0</div><button class="ctr-btn" onclick="changeSets('b4',1)">+</button></div><input class="load-input" data-load="b4" data-label="Rosca direta" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b5"><div><div class="name">Rosca alternada</div><div class="meta">3x 10–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b5',-1)">−</button><div class="ctr-value" id="sets-b5">0</div><button class="ctr-btn" onclick="changeSets('b5',1)">+</button></div><input class="load-input" data-load="b5" data-label="Rosca alternada" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b6"><div><div class="name">Rosca martelo</div><div class="meta">3x 10–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b6',-1)">−</button><div class="ctr-value" id="sets-b6">0</div><button class="ctr-btn" onclick="changeSets('b6',1)">+</button></div><input class="load-input" data-load="b6" data-label="Rosca martelo" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b7"><div><div class="name">21s de bíceps</div><div class="meta">2x</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b7',-1)">−</button><div class="ctr-value" id="sets-b7">0</div><button class="ctr-btn" onclick="changeSets('b7',1)">+</button></div><input class="load-input" data-load="b7" data-label="21s de bíceps" placeholder="Final"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="b8"><div><div class="name">Face pull</div><div class="meta">3x 15</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('b8',-1)">−</button><div class="ctr-value" id="sets-b8">0</div><button class="ctr-btn" onclick="changeSets('b8',1)">+</button></div><input class="load-input" data-load="b8" data-label="Face pull" placeholder="Carga"></label>
+        </div>
+      </section>
+    </section>
 
-<section>
-  <h2>Contato</h2>
-  <div class="card">
-    <p>Email: henrique.hmgomes@outlook.com</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/henriquemds/">Clique aqui</a></p>
-  </div>
-</section>
+    <section id="tab-c" class="tab-panel hidden">
+      <section class="card">
+        <div class="head"><div class="badge">C</div><div><h2>Membros inferiores</h2><div class="focus">Mais volume de pernas e glúteos</div></div></div>
+        <div class="exercise-list">
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c1"><div><div class="name">Agachamento</div><div class="meta">4x 6–10</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c1',-1)">−</button><div class="ctr-value" id="sets-c1">0</div><button class="ctr-btn" onclick="changeSets('c1',1)">+</button></div><input class="load-input" data-load="c1" data-label="Agachamento" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c2"><div><div class="name">Leg press</div><div class="meta">4x 10–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c2',-1)">−</button><div class="ctr-value" id="sets-c2">0</div><button class="ctr-btn" onclick="changeSets('c2',1)">+</button></div><input class="load-input" data-load="c2" data-label="Leg press" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c3"><div><div class="name">Afundo</div><div class="meta">3x 12 cada perna</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c3',-1)">−</button><div class="ctr-value" id="sets-c3">0</div><button class="ctr-btn" onclick="changeSets('c3',1)">+</button></div><input class="load-input" data-load="c3" data-label="Afundo" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c4"><div><div class="name">Cadeira extensora</div><div class="meta">3x 12–15</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c4',-1)">−</button><div class="ctr-value" id="sets-c4">0</div><button class="ctr-btn" onclick="changeSets('c4',1)">+</button></div><input class="load-input" data-load="c4" data-label="Cadeira extensora" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c5"><div><div class="name">Mesa flexora</div><div class="meta">3x 12–15</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c5',-1)">−</button><div class="ctr-value" id="sets-c5">0</div><button class="ctr-btn" onclick="changeSets('c5',1)">+</button></div><input class="load-input" data-load="c5" data-label="Mesa flexora" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c6"><div><div class="name">Elevação pélvica</div><div class="meta">4x 10–12</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c6',-1)">−</button><div class="ctr-value" id="sets-c6">0</div><button class="ctr-btn" onclick="changeSets('c6',1)">+</button></div><input class="load-input" data-load="c6" data-label="Elevação pélvica" placeholder="Carga"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="c7"><div><div class="name">Panturrilha</div><div class="meta">4x 15–20</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('c7',-1)">−</button><div class="ctr-value" id="sets-c7">0</div><button class="ctr-btn" onclick="changeSets('c7',1)">+</button></div><input class="load-input" data-load="c7" data-label="Panturrilha" placeholder="Carga"></label>
+        </div>
+      </section>
+    </section>
 
+    <section id="tab-d" class="tab-panel hidden">
+      <section class="card">
+        <div class="head"><div class="badge">D</div><div><h2>Cardio + Abdômen</h2><div class="focus">Perda de barriga, definição e condicionamento</div></div></div>
+        <div class="exercise-list">
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d1"><div><div class="name">Caminhada inclinada ou bike</div><div class="meta">20 a 30 min moderado</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d1',-1)">−</button><div class="ctr-value" id="sets-d1">0</div><button class="ctr-btn" onclick="changeSets('d1',1)">+</button></div><input class="load-input" data-load="d1" data-label="Cardio moderado" placeholder="Min"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d2"><div><div class="name">HIIT leve</div><div class="meta">10 min • 30s forte / 60s leve</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d2',-1)">−</button><div class="ctr-value" id="sets-d2">0</div><button class="ctr-btn" onclick="changeSets('d2',1)">+</button></div><input class="load-input" data-load="d2" data-label="HIIT leve" placeholder="Ritmo"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d3"><div><div class="name">Prancha frontal</div><div class="meta">3x 30 a 45s</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d3',-1)">−</button><div class="ctr-value" id="sets-d3">0</div><button class="ctr-btn" onclick="changeSets('d3',1)">+</button></div><input class="load-input" data-load="d3" data-label="Prancha frontal" placeholder="Tempo"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d4"><div><div class="name">Prancha lateral</div><div class="meta">3x 30s por lado</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d4',-1)">−</button><div class="ctr-value" id="sets-d4">0</div><button class="ctr-btn" onclick="changeSets('d4',1)">+</button></div><input class="load-input" data-load="d4" data-label="Prancha lateral" placeholder="Tempo"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d5"><div><div class="name">Abdominal infra</div><div class="meta">3x 12–15</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d5',-1)">−</button><div class="ctr-value" id="sets-d5">0</div><button class="ctr-btn" onclick="changeSets('d5',1)">+</button></div><input class="load-input" data-load="d5" data-label="Abdominal infra" placeholder="Reps"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d6"><div><div class="name">Dead bug</div><div class="meta">3x 10 por lado</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d6',-1)">−</button><div class="ctr-value" id="sets-d6">0</div><button class="ctr-btn" onclick="changeSets('d6',1)">+</button></div><input class="load-input" data-load="d6" data-label="Dead bug" placeholder="Reps"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d7"><div><div class="name">Vacuum abdominal</div><div class="meta">4x 20 a 30s</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d7',-1)">−</button><div class="ctr-value" id="sets-d7">0</div><button class="ctr-btn" onclick="changeSets('d7',1)">+</button></div><input class="load-input" data-load="d7" data-label="Vacuum abdominal" placeholder="Tempo"></label>
+          <label class="item"><input class="check exercise-check" type="checkbox" data-id="d8"><div><div class="name">Caminhada final</div><div class="meta">10 min leve</div></div><div class="counter"><button class="ctr-btn" onclick="changeSets('d8',-1)">−</button><div class="ctr-value" id="sets-d8">0</div><button class="ctr-btn" onclick="changeSets('d8',1)">+</button></div><input class="load-input" data-load="d8" data-label="Caminhada final" placeholder="Min"></label>
+        </div>
+      </section>
+    </section>
+
+    <section id="tab-tools" class="tab-panel hidden">
+      <section class="card compact">
+        <div class="section-title">Cronômetro de descanso</div>
+        <div class="timer-display" id="timerDisplay">01:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn primary" onclick="startTimer()">Iniciar</button>
+          <button class="timer-btn" onclick="pauseTimer()">Pausar</button>
+          <button class="timer-btn" onclick="setTimer(60)">1 min</button>
+          <button class="timer-btn" onclick="setTimer(90)">1m30</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">Histórico simples de cargas</div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">Calendário de treinos</div>
+        <div class="calendar" id="calendar"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">Dicas rápidas</div>
+        <div class="tips">
+          <div class="tip"><b>Perda de barriga</b>Cardio + déficit calórico + core frequente ajudam a reduzir gordura abdominal.</div>
+          <div class="tip"><b>Progressão</b>Salve as cargas para acompanhar sua evolução semanal.</div>
+          <div class="tip"><b>Postura</b>Face pull, prancha, dead bug e vacuum ajudam no controle do tronco.</div>
+        </div>
+      </section>
+    </section>
+
+    <div class="footer">Treino PRO Ricky • Versão Premium</div>
+  </div>
+
+  <div class="footer-nav" id="bottomNav">
+    <button class="nav-btn active" data-tab="tab-a">A</button>
+    <button class="nav-btn" data-tab="tab-b">B</button>
+    <button class="nav-btn" data-tab="tab-c">C</button>
+    <button class="nav-btn" data-tab="tab-d">Cardio</button>
+    <button class="nav-btn" data-tab="tab-tools">Extras</button>
+  </div>
+
+  <script>
+    const checks = Array.from(document.querySelectorAll('.exercise-check'));
+    const loadInputs = Array.from(document.querySelectorAll('.load-input'));
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const historyList = document.getElementById('historyList');
+    const calendar = document.getElementById('calendar');
+    const storageKey = 'treino_pro_ricky_premium_v1';
+    const sets = {};
+    let loadHistory = [];
+    let timerSeconds = 60;
+    let timerInterval = null;
+    const timerDisplay = document.getElementById('timerDisplay');
+
+    function updateProgress(){
+      const total = checks.length;
+      const checked = checks.filter(c => c.checked).length;
+      const percent = total ? (checked / total) * 100 : 0;
+      progressFill.style.width = percent + '%';
+      progressText.textContent = `${checked} de ${total} exercícios marcados`;
+    }
+
+    function renderSets(){
+      Object.keys(sets).forEach(id => {
+        const el = document.getElementById('sets-' + id);
+        if (el) el.textContent = sets[id] || 0;
+      });
+    }
+
+    function changeSets(id, delta){
+      sets[id] = Math.max(0, (sets[id] || 0) + delta);
+      renderSets();
+      saveWorkout(false);
+    }
+
+    function rememberLoads(){
+      const now = new Date();
+      const date = now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+      loadInputs.forEach(i => {
+        const value = i.value.trim();
+        const label = i.dataset.label || i.dataset.load;
+        if (!value) return;
+        const idx = loadHistory.findIndex(x => x.key === i.dataset.load);
+        const item = { key:i.dataset.load, label, value, date };
+        if (idx >= 0) loadHistory.splice(idx, 1);
+        loadHistory.unshift(item);
+      });
+      loadHistory = loadHistory.slice(0, 30);
+    }
+
+    function renderHistory(){
+      if (!loadHistory.length){
+        historyList.innerHTML = '<div class="history-item"><div class="history-left"><b>Nenhum histórico ainda</b><span>Salve algumas cargas para começar.</span></div><div class="history-right">—</div></div>';
+        return;
+      }
+      historyList.innerHTML = loadHistory.slice(0,10).map(item => `
+        <div class="history-item">
+          <div class="history-left"><b>${item.label}</b><span>${item.date}</span></div>
+          <div class="history-right">${item.value}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderCalendar(){
+      if(!calendar) return;
+      const days = [];
+      for(let i=1;i<=30;i++){
+        const done = localStorage.getItem('premium_day_' + i) === '1';
+        days.push(`<div class="cal-day ${done ? 'done' : ''}" onclick="toggleDay(${i})">${i}</div>`);
+      }
+      calendar.innerHTML = days.join('');
+    }
+
+    function toggleDay(day){
+      const key = 'premium_day_' + day;
+      if(localStorage.getItem(key) === '1') localStorage.removeItem(key);
+      else localStorage.setItem(key, '1');
+      renderCalendar();
+    }
+
+    function saveWorkout(showAlert=true){
+      rememberLoads();
+      const data = { checks:{}, loads:{}, sets, timerSeconds, loadHistory };
+      checks.forEach(c => data.checks[c.dataset.id] = c.checked);
+      loadInputs.forEach(i => data.loads[i.dataset.load] = i.value);
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      updateProgress();
+      renderHistory();
+      if(showAlert) alert('Progresso salvo.');
+    }
+
+    function loadWorkout(){
+      const raw = localStorage.getItem(storageKey);
+      if(raw){
+        try{
+          const data = JSON.parse(raw);
+          checks.forEach(c => { if(data.checks && c.dataset.id in data.checks) c.checked = data.checks[c.dataset.id]; });
+          loadInputs.forEach(i => { if(data.loads && i.dataset.load in data.loads) i.value = data.loads[i.dataset.load] || ''; });
+          if(data.sets) Object.assign(sets, data.sets);
+          if(typeof data.timerSeconds === 'number') timerSeconds = data.timerSeconds;
+          if(Array.isArray(data.loadHistory)) loadHistory = data.loadHistory;
+        }catch(e){}
+      }
+      renderSets();
+      renderHistory();
+      renderCalendar();
+      updateTimerDisplay();
+      updateProgress();
+    }
+
+    function resetChecks(){
+      checks.forEach(c => c.checked = false);
+      Object.keys(sets).forEach(k => sets[k] = 0);
+      renderSets();
+      saveWorkout();
+    }
+
+    function resetAllData(){
+      checks.forEach(c => c.checked = false);
+      loadInputs.forEach(i => i.value = '');
+      Object.keys(sets).forEach(k => delete sets[k]);
+      loadHistory = [];
+      timerSeconds = 60;
+      for(let i=1;i<=30;i++) localStorage.removeItem('premium_day_' + i);
+      localStorage.removeItem(storageKey);
+      renderSets();
+      renderHistory();
+      renderCalendar();
+      updateTimerDisplay();
+      updateProgress();
+      alert('Todos os dados foram apagados.');
+    }
+
+    function updateTimerDisplay(){
+      const min = String(Math.floor(timerSeconds / 60)).padStart(2,'0');
+      const sec = String(timerSeconds % 60).padStart(2,'0');
+      timerDisplay.textContent = `${min}:${sec}`;
+    }
+
+    function setTimer(seconds){
+      timerSeconds = seconds;
+      updateTimerDisplay();
+      saveWorkout(false);
+    }
+
+    function startTimer(){
+      if(timerInterval) return;
+      timerInterval = setInterval(() => {
+        if(timerSeconds > 0){
+          timerSeconds--;
+          updateTimerDisplay();
+          saveWorkout(false);
+        }else{
+          clearInterval(timerInterval);
+          timerInterval = null;
+          alert('Descanso finalizado.');
+        }
+      }, 1000);
+    }
+
+    function pauseTimer(){
+      clearInterval(timerInterval);
+      timerInterval = null;
+      saveWorkout(false);
+    }
+
+    function activateTab(tabId){
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    document.querySelectorAll('.tab-btn, .nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+    });
+
+    checks.forEach(c => c.addEventListener('change', () => saveWorkout(false)));
+    loadInputs.forEach(i => i.addEventListener('change', () => saveWorkout(false)));
+    window.addEventListener('load', loadWorkout);
+  </script>
 </body>
 </html>
